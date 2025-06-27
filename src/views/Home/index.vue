@@ -17,15 +17,21 @@ const router = useRouter();
 const tableData: any = ref([
   {
     id: 1,
-    name: "box",
+    name: "Box",
     desc: "第一个3D应用",
     path: "/box",
   },
   {
     id: 2,
-    name: "zbandgd",
+    name: "OrbitControls",
     desc: "坐标辅助器与轨道控制器",
-    path: "/zbandgd",
+    path: "/orbit-controls",
+  },
+  {
+    id: 3,
+    name: "Position",
+    desc: "物体的缩放与旋转",
+    path: "/position",
   },
 ]);
 const toPath = (item: any) => {

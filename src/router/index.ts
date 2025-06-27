@@ -18,6 +18,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "controls" */ "@/views/OrbitControls/index.vue"),
   },
+  {
+    path: "/position", // 物体位移与父子元素
+    name: "Position",
+    component: () =>
+      import(/* webpackChunkName: "Position" */ "@/views/Position/index.vue"),
+  },
 ];
 
 const router = createRouter({

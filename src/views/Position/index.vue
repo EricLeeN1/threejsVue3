@@ -6,8 +6,8 @@
 import { onMounted, ref } from "vue";
 import * as THREE from "three";
 // 导入轨道控制器
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
- 
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
 const container: any = ref(null);
 
 onMounted(() => {
@@ -36,14 +36,20 @@ onMounted(() => {
 
   // 创建材质
   const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  const material1 = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 
   // 创建网格
+  let  parentCube = new THREE.Mesh(geometry, material1);
   const cube = new THREE.Mesh(geometry, material);
+  parentCube.add(cube);
+  parentCube.position.set(-3, 0, 0);
+
+  cube.position.set(4, 0, 0);
 
   // 将网格添加到场景中
-  scene.add(cube);
+  scene.add(parentCube);
 
-    // 添加世界坐标辅助器
+  // 添加世界坐标辅助器
   const axesHelper = new THREE.AxesHelper(5);
   scene.add(axesHelper); // 红色代表 X 轴. 绿色代表 Y 轴. 蓝色代表 Z 轴.
   // 添加轨道控制器
@@ -54,14 +60,14 @@ onMounted(() => {
   // 设置阻尼系数
   controls.dampingFactor = 0.05;
   // 设置旋转速度
-  controls.autoRotate = true;
+  controls.autoRotate = false;
   // 渲染循环
   const animate = () => {
     controls.update();
     requestAnimationFrame(animate);
 
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+    // cube.rotation.x += 0.01;
+    // cube.rotation.y += 0.01;
 
     renderer.render(scene, camera);
   };
