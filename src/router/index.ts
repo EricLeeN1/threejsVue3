@@ -13,10 +13,10 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "Box" */ "@/views/Box/index.vue"),
   },
   {
-    path: "/zbandgd",
-    name: "ZbAndGd",
+    path: "/orbit-controls", // 控制器
+    name: "OrbitControls",
     component: () =>
-      import(/* webpackChunkName: "Box" */ "@/views/ZbAndGd/index.vue"),
+      import(/* webpackChunkName: "controls" */ "@/views/OrbitControls/index.vue"),
   },
 ];
 
