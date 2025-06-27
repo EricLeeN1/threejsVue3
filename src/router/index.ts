@@ -24,6 +24,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "Position" */ "@/views/Position/index.vue"),
   },
+  {
+    path: "/scale", // 物体的缩放与旋转
+    name: "Scale",
+    component: () =>
+      import(/* webpackChunkName: "Scale" */ "@/views/Scale/index.vue"),
+  },
 ];
 
 const router = createRouter({

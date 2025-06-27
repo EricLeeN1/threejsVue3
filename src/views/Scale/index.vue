@@ -43,8 +43,15 @@ onMounted(() => {
   const cube = new THREE.Mesh(geometry, material);
   parentCube.add(cube);
   parentCube.position.set(-3, 0, 0);
-
-  cube.position.set(4, 0, 0);
+  parentCube.scale.set(2, 2, 2);
+  // parentCube.rotation.set(Math.PI / -4, Math.PI / -4, Math.PI / -4);
+  parentCube.rotation.x = Math.PI / 4;
+  cube.position.set(3, 0, 0);
+  // 缩放
+  cube.scale.set(2, 2, 2);
+  // 旋转
+  // cube.rotation.set(Math.PI / 4, Math.PI / 4, Math.PI / 4);
+  cube.rotation.x = Math.PI / 4;
 
   // 将网格添加到场景中 
   scene.add(parentCube);

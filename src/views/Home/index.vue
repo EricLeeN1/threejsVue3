@@ -30,8 +30,14 @@ const tableData: any = ref([
   {
     id: 3,
     name: "Position",
-    desc: "物体的缩放与旋转",
+    desc: "物体的位移与父子元素",
     path: "/position",
+  },
+   {
+    id: 4,
+    name: "Scale",
+    desc: "物体的缩放与旋转",
+    path: "/scale",
   },
 ]);
 const toPath = (item: any) => {
