@@ -9,13 +9,23 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 const container: any = ref(null);
+let scene: any = null; // 创建场景
+let camera: any = null; // 创建相机
+let renderer: any = null;// 创建渲染器
+let geometry: any = null;// 创建几何体和材质
+let material: any = null;// 创建材质
+let material1: any = null;// 创建材质
+let parentCube: any = null;// 创建父元素
+let cube: any = null; // 创建网格
+let axesHelper: any = null; // 创建坐标轴
+let controls: any = null;// 创建控制器
 
-onMounted(() => {
+const initThree = () => {
   // 创建场景
-  const scene = new THREE.Scene();
+  scene = new THREE.Scene();
 
   // 创建相机
-  const camera = new THREE.PerspectiveCamera(
+  camera = new THREE.PerspectiveCamera(
     75, // 视角
     window.innerWidth / window.innerHeight, // 宽高比
     0.1, // 近平面
@@ -27,20 +37,20 @@ onMounted(() => {
   camera.lookAt(0, 0, 0);
 
   // 创建渲染器
-  const renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
   container.value.appendChild(renderer.domElement);
 
   // 创建几何体和材质
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
+  geometry = new THREE.BoxGeometry(1, 1, 1);
 
   // 创建材质
-  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  const material1 = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+  material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  material1 = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 
   // 创建网格
-  let  parentCube = new THREE.Mesh(geometry, material1);
-  const cube = new THREE.Mesh(geometry, material);
+  parentCube = new THREE.Mesh(geometry, material1);
+  cube = new THREE.Mesh(geometry, material);
   parentCube.add(cube);
   parentCube.position.set(-3, 0, 0);
   parentCube.scale.set(2, 2, 2);
@@ -53,14 +63,14 @@ onMounted(() => {
   // cube.rotation.set(Math.PI / 4, Math.PI / 4, Math.PI / 4);
   cube.rotation.x = Math.PI / 4; // 会叠加父元素的旋转
 
-  // 将网格添加到场景中 
+  // 将网格添加到场景中
   scene.add(parentCube);
 
   // 添加世界坐标辅助器
-  const axesHelper = new THREE.AxesHelper(5);
+  axesHelper = new THREE.AxesHelper(5);
   scene.add(axesHelper); // 红色代表 X 轴. 绿色代表 Y 轴. 蓝色代表 Z 轴.
   // 添加轨道控制器
-  const controls = new OrbitControls(camera, renderer.domElement);
+  controls = new OrbitControls(camera, renderer.domElement);
 
   // 设置带阻尼的惯性
   controls.enableDamping = true;
@@ -68,18 +78,52 @@ onMounted(() => {
   controls.dampingFactor = 0.05;
   // 设置旋转速度
   controls.autoRotate = false;
-  // 渲染循环
-  const animate = () => {
-    controls.update();
-    requestAnimationFrame(animate);
+};
 
-    // cube.rotation.x += 0.01;
-    // cube.rotation.y += 0.01;
+const addBtn = () => {
+  const btn = document.createElement("button");
+  btn.innerHTML = "点击全屏";
+  btn.style.position = "fixed";
+  btn.style.left = "10px";
+  btn.style.top = "10px";
+  btn.style.zIndex = "9999";
+  btn.addEventListener("click", () => {
+    if (document.fullscreenElement) {
+      btn.innerHTML = "点击全屏";
+      document.exitFullscreen();
+    } else {
+      btn.innerHTML = "退出全屏";
+      document.body.requestFullscreen();
+    }
+  });
+  console.log(btn);
+  document.body.appendChild(btn);
+};
 
-    renderer.render(scene, camera);
-  };
+// 渲染循环
+const animate = () => {
+  controls.update();
+  requestAnimationFrame(animate);
 
+  // cube.rotation.x += 0.01;
+  // cube.rotation.y += 0.01;
+
+  renderer.render(scene, camera);
+};
+
+onMounted(() => {
+  initThree();
   animate();
+
+  window.addEventListener("resize", () => {
+    // 重置渲染器宽高比
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    // 重置相机宽高比
+    camera.aspect = window.innerWidth / window.innerHeight;
+    // 更新相机投影矩阵
+    camera.updateProjectionMatrix();
+  });
+  addBtn();
 });
 </script>
 
