@@ -51,7 +51,7 @@ onMounted(() => {
   cube.scale.set(2, 2, 2);
   // 旋转
   // cube.rotation.set(Math.PI / 4, Math.PI / 4, Math.PI / 4);
-  cube.rotation.x = Math.PI / 4;
+  cube.rotation.x = Math.PI / 4; // 会叠加父元素的旋转
 
   // 将网格添加到场景中 
   scene.add(parentCube);

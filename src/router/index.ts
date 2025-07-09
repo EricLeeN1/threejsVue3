@@ -30,6 +30,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "Scale" */ "@/views/Scale/index.vue"),
   },
+  {
+    path: "/navagitor", // 物体的缩放与旋转
+    name: "Navagitor",
+    component: () =>
+      import(/* webpackChunkName: "Navagitor" */ "@/views/navagitor/index.vue"),
+  },
 ];
 
 const router = createRouter({

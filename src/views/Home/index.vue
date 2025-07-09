@@ -2,7 +2,12 @@
   <el-table :data="tableData" style="width: 100%">
     <el-table-column prop="name" label="名称" width="120" align="center" />
     <el-table-column prop="desc" label="描述" width="600" />
-    <el-table-column fixed="right" label="Operations" min-width="120" align="center">
+    <el-table-column
+      fixed="right"
+      label="Operations"
+      min-width="120"
+      align="center"
+    >
       <template #default="{ row }">
         <el-button @click="toPath(row)" link type="primary" size="small">
           详情
@@ -33,11 +38,17 @@ const tableData: any = ref([
     desc: "物体的位移与父子元素",
     path: "/position",
   },
-   {
+  {
     id: 4,
     name: "Scale",
     desc: "物体的缩放与旋转",
     path: "/scale",
+  },
+  {
+    id: 5,
+    name: "Navagitor",
+    desc: "手机浏览器信息获取",
+    path: "/navagitor",
   },
 ]);
 const toPath = (item: any) => {
