@@ -50,6 +50,12 @@ const tableData: any = ref([
     desc: "手机浏览器信息获取",
     path: "/navagitor",
   },
+  {
+    id: 6,
+    name: "LilGui",
+    desc: "lil-GUI调试",
+    path: "/lil-gui",
+  },
 ]);
 const toPath = (item: any) => {
   console.log("click", item);

@@ -36,6 +36,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "Navagitor" */ "@/views/navagitor/index.vue"),
   },
+  {
+    path: "/lil-gui", // Lil-gui 调试开发
+    name: "LilGui",
+    component: () =>
+      import(/* webpackChunkName: "LilGui" */ "@/views/Lil-gui/index.vue"),
+  },
 ];
 
 const router = createRouter({
